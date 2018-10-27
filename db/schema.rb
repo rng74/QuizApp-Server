@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_20_122846) do
+ActiveRecord::Schema.define(version: 2018_10_27_145721) do
 
   create_table "animes", force: :cascade do |t|
     t.string "title_orig"
     t.string "title_ru"
     t.string "poster_link"
     t.integer "rating"
-    t.string "type"
+    t.string "tip"
     t.string "song_name"
     t.string "song_link"
     t.datetime "created_at", null: false
