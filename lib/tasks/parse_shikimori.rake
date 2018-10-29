@@ -51,9 +51,9 @@ namespace :parse do
         puts("No such anime")
         not_found+=1
       end
+      sleep(1)
     end
 
     puts("+18: #{hentai}\nnot_found: #{not_found}\nok: #{ok}")
-
   end
 end
