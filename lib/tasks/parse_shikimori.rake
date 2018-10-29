@@ -34,8 +34,6 @@ namespace :parse do
           puts("Hentai!!!")
         else
           ok+=1
-          puts("Adding #{title}")
-
           from_page = JSON.parse(cur_html.css(".l-menu .b-animes-menu .block")[1].css("#rates_statuses_stats")[0]["data-stats"])
           rating = from_page[0]["value"]
 
@@ -46,7 +44,7 @@ namespace :parse do
           elsif anime["album_name"].include?("OST")
             tip = "OST"
           end
-
+          puts("Adding #{title} #{tip}")
           Anime.create("title_orig"=>anime["title_orig"], "title_ru"=>title, "poster_link"=>anime["poster_link"], "rating"=>rating, "tip"=>tip, "song_name"=>anime["song_name"], "song_link"=>anime["song_link"])
         end
       else
