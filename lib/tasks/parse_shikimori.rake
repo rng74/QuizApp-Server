@@ -16,14 +16,12 @@ namespace :parse do
     anime_info = JSON.parse(res)
 
     puts("parsing begins")
-    hentai = 0
-    not_found = 0
-    ok = 0
+    status = 1;
     prev_name = ""
     title = ""
     rating = ""
     anime_info.each do |anime|
-      if anime["title_orig"].eql?(prev_name)
+      if anime["title_orig"].eql?(prev_name) && status == 0
         if anime["album_name"].include?("OP")
           tip = "OP"
         elsif anime["album_name"].include?("ED")
@@ -45,10 +43,10 @@ namespace :parse do
             title = anime["title_orig"]
           end
           if cur_html.at_css(".age-restricted-warning")
-            hentai+=1
+            status = 1
             puts("Hentai!!!")
           else
-            ok+=1
+            status = 0
             from_page = JSON.parse(cur_html.css(".l-menu .b-animes-menu .block")[1].css("#rates_statuses_stats")[0]["data-stats"])
             rating = from_page[0]["value"]
 
@@ -64,7 +62,7 @@ namespace :parse do
           end
         else
           puts("No such anime")
-          not_found+=1
+          status = 2
         end
         sleep(3)
       end
