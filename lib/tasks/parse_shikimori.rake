@@ -69,6 +69,7 @@ namespace :parse do
           sleep(3)
         end
       rescue
+        status = 2
         puts("Arrrgh! An error ocured! #{$!}")
         sleep(600)
       end
