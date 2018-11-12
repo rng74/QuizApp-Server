@@ -1,13 +1,14 @@
 class Api::V1::ReqController < ApplicationController
   def send_it
     @arr = [[], [], [], []]
-    @all = Anime.all.order(rating: :desc).group_by(&:title_orig)
+    @all = Anime.select("title_orig", "title_ru", "poster_link", "song_link").order(rating: :desc).group_by(&:title_orig)
 
-    @top100 = @all.drop(10).first(100)
     @top40 = @all.first(40)
+    @top100 = @all.drop(10).first(100)
     @without_first_100 = @all.drop(110)
 
     @first_part = @top40.sample(5)
+    @top100 -= @first_part
     @second_part = @top100.sample(20)
     @last_part = @without_first_100.sample(75)
 
